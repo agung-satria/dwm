@@ -1,12 +1,12 @@
---- config.def.h	2019-02-02 15:55:28.000000000 +0300
-+++ config.def.h	2020-02-18 03:33:58.212113667 +0300
-@@ -70,6 +70,9 @@
+--- config.def.h	2020-02-18 03:33:58.212113667 +0300
++++ config.def.h	2019-02-02 15:55:28.000000000 +0300
+@@ -70,9 +70,6 @@
  	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
  	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
  	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-+	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
-+	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
-+	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
+-	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
+-	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
+-	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
  	{ MODKEY,                       XK_Return, zoom,           {0} },
  	{ MODKEY,                       XK_Tab,    view,           {0} },
  	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
