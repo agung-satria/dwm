@@ -43,6 +43,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
  	{ "Gimp-2.10",	        NULL,			  NULL,		    1 << 2,	      0,			     -1 },
  	{ "Firefox",            NULL,			  NULL,		    1 << 1,			  0,			     -1 },
+ 	{ "Brave-browser",      NULL,			  NULL,		    1 << 1,			  0,			     -1 },
   { "Yad",				        NULL,       NULL,       0,            1,           -1 },
 	{ "Wine",               NULL,       NULL,       0,            1,           -1 },
 	{ "Arandr",             NULL,       NULL,       0,            1,           -1 },
@@ -171,6 +172,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_n,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = +0.25} },
+	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = -0.25} },
+	{ MODKEY|ShiftMask,             XK_g,      setcfact,       {.f =  0.00} },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_space,  zoom,           {0} },
