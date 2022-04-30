@@ -8,6 +8,11 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 2;       /* snap pixel */
+static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
+static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
@@ -72,22 +77,26 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
-
-#include "fibonacci.c"
+#define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#include "vanitygaps.c"
+/* #include "fibonacci.c" */
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
-	{ "TTT",      bstack },
-	{ "===",      bstackhoriz },
-	{ "|M|",      centeredmaster },
-	{ ">M>",      centeredfloatingmaster },
-	{ "[D]",      deck },
- 	{ "[@]",      spiral },
- 	{ "[\\]",     dwindle },
-
-
+/*0 */ { "[]=",      tile },    /* first entry is default */
+/*1 */ { "[M]",      monocle },
+/*2 */ { "[@]",      spiral },
+/*3 */ { "[\\]",     dwindle },
+/*4 */ { "H[]",      deck },
+/*5 */ { "TTT",      bstack },
+/*6 */ { "===",      bstackhoriz },
+/*7 */ { "HHH",      grid },
+/*8 */ { "###",      nrowgrid },
+/*9 */ { "---",      horizgrid },
+/*10*/ { ":::",      gaplessgrid },
+/*11*/ { "|M|",      centeredmaster },
+/*12*/ { ">M>",      centeredfloatingmaster },
+/*13*/ { "><>",      NULL },    /* no layout function means floating behavior */
+	{ NULL,       NULL },
 
 };
 
@@ -190,17 +199,33 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_space,  zoom,           {0} },
+	{ MODKEY,                       XK_x,      togglegaps,     {0} },
+	{ MODKEY|ShiftMask,             XK_x,      defaultgaps,    {0} },
+	{ MODKEY,                       XK_z,      incrgaps,       {.i = +2 } },
+	{ MODKEY|ShiftMask,             XK_z,      incrgaps,       {.i = -2 } },
+	{ MODKEY|ControlMask,           XK_i,      incrigaps,      {.i = +2 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_i,      incrigaps,      {.i = -2 } },
+	{ MODKEY|ControlMask,           XK_o,      incrogaps,      {.i = +2 } },
+	{ MODKEY|ControlMask|ShiftMask, XK_o,      incrogaps,      {.i = -2 } },
+	{ MODKEY|ALTKEY,                XK_6,      incrihgaps,     {.i = +2 } },
+	{ MODKEY|ALTKEY|ShiftMask,      XK_6,      incrihgaps,     {.i = -2 } },
+	{ MODKEY|ALTKEY,                XK_7,      incrivgaps,     {.i = +2 } },
+	{ MODKEY|ALTKEY|ShiftMask,      XK_7,      incrivgaps,     {.i = -2 } },
+	{ MODKEY|ALTKEY,                XK_8,      incrohgaps,     {.i = +2 } },
+	{ MODKEY|ALTKEY|ShiftMask,      XK_8,      incrohgaps,     {.i = -2 } },
+	{ MODKEY|ALTKEY,                XK_9,      incrovgaps,     {.i = +2 } },
+	{ MODKEY|ALTKEY|ShiftMask,      XK_9,      incrovgaps,     {.i = -2 } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[5]} },
-	{ MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[6]} },
-	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[7]} },
-	{ MODKEY|ShiftMask,             XK_s,      setlayout,      {.v = &layouts[8]} },
-
+	{ MODKEY,            XK_t,   setlayout,   {.v = &layouts[0]} }, //tile
+	{ MODKEY|ShiftMask,  XK_t,   setlayout,   {.v = &layouts[5]} }, //bstack
+	{ MODKEY,            XK_y,   setlayout,   {.v = &layouts[9]} }, //horizgrid
+	{ MODKEY|ShiftMask,  XK_y,   setlayout,   {.v = &layouts[10]} }, //gaplessgrid
+	{ MODKEY,            XK_u,   setlayout,   {.v = &layouts[11]} }, //ceneteredmaster
+	{ MODKEY|ShiftMask,  XK_u,   setlayout,   {.v = &layouts[12]} }, //ceneteredfloatingmaster
+	{ MODKEY|ShiftMask,  XK_f,   setlayout,   {.v = &layouts[13]} }, //floating
+	{ MODKEY|ShiftMask,  XK_s,   setlayout,   {.v = &layouts[2]} }, //spiral
+	{ MODKEY,            XK_c,   setlayout,   {.v = &layouts[4]} }, //deck
 
 	{ MODKEY,                       XK_semicolon,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -245,4 +270,14 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 	{ ClkTabBar,            0,              Button1,        focuswin,       {0} },
 };
+
+
+
+
+
+
+
+
+
+
 
