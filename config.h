@@ -23,7 +23,7 @@ static const int showtab			= showtab_auto;        /* Default tab bar show mode *
 static const int toptab				= False;               /* False means bottom tab bar */
 
 static const char *fonts[]        = { "Iosevka Nerd Font:style:medium:size=15",
-                                      "JoyPixels:size=12:antialias=true:autohint=true", 
+                                      "JoyPixels:size=13:antialias=true:autohint=true", 
                                       "Material Design Icons-Regular:size=15"};
 static const char dmenufont[]     = "monospace:size=15";
 static const char col_gray1[]     = "#222222";
@@ -31,10 +31,11 @@ static const char col_gray2[]     = "#444444";
 static const char col_gray3[]     = "#bbbbbb";
 static const char col_gray4[]     = "#eeeeee";
 static const char col_cyan[]      = "#005577";
+static const char col_red[]       = "#c80000";
 static const char *colors[][3]    = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_red  },
 };
 
 /* tagging */
@@ -47,31 +48,32 @@ static const Rule rules[] = {
  * WM_CLASS(STRING) = instance, class
  * WM_NAME(STRING) = title
 */
-	/* class                instance    title       tags mask     isfloating   monitor */
- 	{ "Gimp-2.10",	        NULL,			  NULL,		    1 << 2,	      0,			     -1 },
- 	{ "Firefox",            NULL,			  NULL,		    1 << 1,			  0,			     -1 },
- 	{ "Brave-browser",      NULL,			  NULL,		    1 << 1,			  0,			     -1 },
-  { "Yad",				        NULL,       NULL,       0,            1,           -1 },
-	{ "Wine",               NULL,       NULL,       0,            1,           -1 },
-	{ "Arandr",             NULL,       NULL,       0,            1,           -1 },
-	{ "ksnip",              NULL,       NULL,       0,            1,           -1 },
-	{ "Pavucontrol",        NULL,       NULL,       0,            1,           -1 },
-	{ "vokoscreen",         NULL,       NULL,       0,            1,           -1 },
-	{ "SimpleScreenRecorder",NULL,      NULL,       0,            1,           -1 },
-	{ "xdman-Main",         NULL,       NULL,       0,            1,           -1 },
-	{ "zoom",               NULL,       NULL,       0,            1,           -1 },
-	{ "arandr",             NULL,       NULL,       0,            1,           -1 },
-	{ "audacious",          NULL,       NULL,       0,            1,           -1 },
-	{ "Dragon",             NULL,       NULL,       0,            1,           -1 },
-	{ "firefox",            NULL,       NULL,       1 << 1,       0,           -1 },
+	/* class                instance    title       tags mask     iscentered   isfloating   monitor */
+ 	{ "Gimp-2.10",	        NULL,			  NULL,		    1 << 2,	      0,           0,			     -1 },
+ 	{ "Firefox",            NULL,			  NULL,		    1 << 1,			  0,           0,			     -1 },
+ 	{ "Brave-browser",      NULL,			  NULL,		    1 << 1,			  0,           0,			     -1 },
+  { "St",				          NULL,       NULL,       0,            1,           0,           -1 },
+  { "Yad",				        NULL,       NULL,       0,            0,           1,           -1 },
+	{ "Wine",               NULL,       NULL,       0,            0,           1,           -1 },
+	{ "Arandr",             NULL,       NULL,       0,            1,           1,           -1 },
+	{ "ksnip",              NULL,       NULL,       0,            1,           1,           -1 },
+	{ "Pavucontrol",        NULL,       NULL,       0,            1,           1,           -1 },
+	{ "vokoscreen",         NULL,       NULL,       0,            1,           1,           -1 },
+	{ "SimpleScreenRecorder",NULL,      NULL,       0,            1,           1,           -1 },
+	{ "xdman-Main",         NULL,       NULL,       0,            1,           1,           -1 },
+	{ "zoom",               NULL,       NULL,       0,            0,           0,           -1 },
+	{ "arandr",             NULL,       NULL,       0,            1,           1,           -1 },
+	{ "audacious",          NULL,       NULL,       0,            0,           0,           -1 },
+	{ "Dragon",             NULL,       NULL,       0,            1,           1,           -1 },
+	{ "firefox",            NULL,       NULL,       1 << 1,       0,           0,           -1 },
   /* floatthings */
-  { "float-st",           NULL,       NULL,       0,            1,           -1 },
-  { "float-st-ranger",    NULL,       NULL,       0,            1,           -1 },
-  { "float-st-calcurse",  NULL,       NULL,       0,            1,           -1 },
-  { "float-st-calc",      NULL,       NULL,       0,            1,           -1 },
-  { "float-st-ncmpcpp",   NULL,       NULL,       0,            1,           -1 },
-  { "float-st-nmtui",     NULL,       NULL,       0,            1,           -1 },
-  { "float-st-bpytop",    NULL,       NULL,       0,            1,           -1 },
+  { "float-st",           NULL,       NULL,       0,            0,           1,           -1 },
+  { "float-st-ranger",    NULL,       NULL,       0,            0,           1,           -1 },
+  { "float-st-calcurse",  NULL,       NULL,       0,            0,           1,           -1 },
+  { "float-st-calc",      NULL,       NULL,       0,            0,           1,           -1 },
+  { "float-st-ncmpcpp",   NULL,       NULL,       0,            0,           1,           -1 },
+  { "float-st-nmtui",     NULL,       NULL,       0,            0,           1,           -1 },
+  { "float-st-bpytop",    NULL,       NULL,       0,            0,           1,           -1 },
 };
 
 /* layout(s) */
@@ -219,6 +221,7 @@ static Key keys[] = {
 	{ MODKEY,            XK_u,   setlayout,   {.v = &layouts[11]} }, //ceneteredmaster
 	{ MODKEY|ShiftMask,  XK_u,   setlayout,   {.v = &layouts[12]} }, //ceneteredfloatingmaster
 	{ MODKEY|ShiftMask,  XK_f,   setlayout,   {.v = &layouts[13]} }, //floating
+	{ MODKEY,            XK_m,   setlayout,   {.v = &layouts[1]} }, //tile
 	{ MODKEY|ShiftMask,  XK_s,   setlayout,   {.v = &layouts[2]} }, //spiral
 	{ MODKEY,            XK_c,   setlayout,   {.v = &layouts[4]} }, //deck
 
