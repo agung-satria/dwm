@@ -1,10 +1,10 @@
---- dwm.c.orig
+--- dwm.c
 +++ dwm.c
-@@ -207,6 +207,7 @@ static void setup(void);
- static void showhide(Client *c);
- static void sigchld(int unused);
- static void spawn(const Arg *arg);
-+static void swapfocus();
- static void tag(const Arg *arg);
- static void tagmon(const Arg *arg);
- static void tile(Monitor *);
+@@ -95,6 +97,7 @@ struct Client {
+ 	int bw, oldbw;
+ 	unsigned int tags;
+ 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int beingmoved;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
