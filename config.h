@@ -122,6 +122,7 @@ static const char *termcmd[]  = { "st", NULL };
 
 #include <X11/XF86keysym.h>
 #include "movestack.c"
+#include "nextprevtag.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
   /*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^agstr^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */
@@ -213,6 +214,8 @@ static Key keys[] = {
 	{ MODKEY|ALTKEY|ShiftMask,      XK_8,      incrohgaps,     {.i = -3 } },
 	{ MODKEY|ALTKEY,                XK_9,      incrovgaps,     {.i = +3 } },
 	{ MODKEY|ALTKEY|ShiftMask,      XK_9,      incrovgaps,     {.i = -3 } },
+  { MODKEY,                       XK_o,      view_adjacent,  { .i = +1 } },
+	{ MODKEY,                       XK_i,      view_adjacent,  { .i = -1 } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,            XK_t,   setlayout,   {.v = &layouts[0]} }, //tile
@@ -278,4 +281,6 @@ static Button buttons[] = {
 	{ ClkTagBar,        MODKEY,       Button1,     tag,            {0} },
 	{ ClkTagBar,        MODKEY,       Button3,     toggletag,      {0} },
 	{ ClkTabBar,        0,            Button1,     focuswin,       {0} },
+  { ClkTagBar,        0,            Button4,     view_adjacent,  { .i = -1 } },
+	{ ClkTagBar,        0,            Button5,     view_adjacent,  { .i = +1 } },
 };
