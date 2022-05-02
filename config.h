@@ -74,6 +74,7 @@ static const Rule rules[] = {
   { "float-st-ncmpcpp",   NULL,       NULL,       0,            1,           1,           -1 },
   { "float-st-nmtui",     NULL,       NULL,       0,            0,           1,           -1 },
   { "float-st-bpytop",    NULL,       NULL,       0,            1,           1,           -1 },
+  { "float-st-obs",       NULL,       NULL,       0,            1,           1,           -1 },
 };
 
 /* layout(s) */
