@@ -158,8 +158,7 @@ static Key keys[] = {
   { MODKEY,											    XK_Escape,    spawn,		SHCMD("sysact") },
   { MODKEY,           					    XK_g,         spawn,		SHCMD("editconfig") },
 	{ ControlMask|ALTKEY,		          XK_l,   	    spawn,	  SHCMD("lock") },
-  { MODKEY|ALTKEY,     					    XK_x,         spawn,		SHCMD("lock.sh") },
-  { MODKEY|ControlMask,       	    XK_x,         spawn,		SHCMD("betterlockscreen --lock") },
+  { MODKEY|ALTKEY,            	    XK_x,         spawn,		SHCMD("betterlockscreen --lock") },
   { MODKEY|ShiftMask,  					    XK_e,         spawn,		SHCMD("pcmanfm") },
 	{ MODKEY,			                    XK_grave,	  spawn,	    SHCMD("dmenuunicode") },
 	{ MODKEY,			                    XK_a,   	  spawn,	    SHCMD("dunstctl history-pop") },
@@ -254,6 +253,9 @@ static Key keys[] = {
 	{ MODKEY|ALTKEY,        XK_period, tagmon,         {.i = +1 } },
 /*{ MODKEY,               XK_0,      view,           {.ui = ~0 } }, */
 /*{ MODKEY|ShiftMask,     XK_0,      tag,            {.ui = ~0 } }, */
+	{ MODKEY|ControlMask,   XK_c, 		 setborderpx,  {.i = +1 } },
+	{ MODKEY|ControlMask,   XK_x, 		 setborderpx,  {.i = -1 } },
+	{ MODKEY|ControlMask,   XK_z,      setborderpx,  {.i = 0 } },
 	TAGKEYS(                XK_1,                      0)
 	TAGKEYS(                XK_2,                      1)
 	TAGKEYS(                XK_3,                      2)
