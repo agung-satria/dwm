@@ -186,6 +186,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_w,      tabmode,        {-1} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+  { ALTKEY,                       XK_Tab,    swapfocus,      {0} }, 
 	{ MODKEY,                       XK_n,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_n,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
