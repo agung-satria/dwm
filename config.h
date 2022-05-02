@@ -178,6 +178,7 @@ static Key keys[] = {
 	{ 0,			     	XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ ShiftMask,	  XK_Print,	spawn,		SHCMD("maimpick") },
 	{ ControlMask,  XK_Print,	spawn,		SHCMD("ss-cp") },
+	{ MODKEY,	      XK_v,    spawn,	    SHCMD("dmenurecord") },
 
   /*___________________________________________________agstr____________________________________________________ */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
