@@ -6,13 +6,13 @@
 #define TERMCLASS "St"
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int snap      = 2;        /* snap pixel */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
+static const unsigned int snap      = 1;        /* snap pixel */
 static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 12;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 14;       /* horiz outer gap between windows and screen edge */
 static const unsigned int gappov    = 25;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
@@ -74,6 +74,7 @@ static const Rule rules[] = {
   { "float-st-ncmpcpp",   NULL,       NULL,       0,            1,           1,           -1 },
   { "float-st-nmtui",     NULL,       NULL,       0,            0,           1,           -1 },
   { "float-st-bpytop",    NULL,       NULL,       0,            1,           1,           -1 },
+  { "float-st-gotop",     NULL,       NULL,       0,            1,           1,           -1 },
   { "float-st-obs",       NULL,       NULL,       0,            1,           1,           -1 },
 };
 
@@ -154,18 +155,18 @@ static Key keys[] = {
 	{ MODKEY,			          XK_bracketright,	spawn,		SHCMD("mpc -p 6601 seek +5") },
 	{ MODKEY|ShiftMask,		  XK_bracketright,	spawn,		SHCMD("mpc -p 6601 seek +30") },
   /* launch script (dmenu, etc) */
- 	{ MODKEY,		                    	XK_BackSpace,	spawn,	  SHCMD("sysact") },
-  { MODKEY,											    XK_Escape,    spawn,		SHCMD("sysact") },
-  { MODKEY,           					    XK_g,         spawn,		SHCMD("editconfig") },
-	{ ControlMask|ALTKEY,		          XK_l,   	    spawn,	  SHCMD("lock") },
-  { MODKEY|ALTKEY,            	    XK_x,         spawn,		SHCMD("betterlockscreen --lock") },
-  { MODKEY|ShiftMask,  					    XK_e,         spawn,		SHCMD("pcmanfm") },
-	{ MODKEY,			                    XK_grave,	  spawn,	    SHCMD("dmenuunicode") },
-	{ MODKEY,			                    XK_a,   	  spawn,	    SHCMD("dunstctl history-pop") },
-	{ MODKEY|ShiftMask,		            XK_a,   	  spawn,	    SHCMD("dunstctl close-all") },
-	{ MODKEY|ControlMask,		          XK_a,   	  spawn,	    SHCMD("dunstctl close") },
-	{ MODKEY|ControlMask,		          XK_m,   	  spawn,	    SHCMD("dmenumount") },
-	{ MODKEY|ControlMask|ShiftMask,	  XK_m,   	  spawn,	    SHCMD("dmenuumount") },
+ 	{ MODKEY,		            XK_BackSpace,	    spawn,	  SHCMD("sysact") },
+  { MODKEY,								XK_Escape,        spawn,		SHCMD("sysact") },
+  { MODKEY,           		XK_g,             spawn,		SHCMD("editconfig") },
+	{ ControlMask|ALTKEY,		XK_l,   	        spawn,	  SHCMD("lock") },
+  { MODKEY|ALTKEY,        XK_x,             spawn,		SHCMD("betterlockscreen --lock") },
+  { MODKEY|ShiftMask,  		XK_e,             spawn,		SHCMD("pcmanfm") },
+	{ MODKEY,			          XK_grave,	        spawn,	  SHCMD("dmenuunicode") },
+	{ MODKEY,			          XK_a,   	        spawn,	  SHCMD("dunstctl history-pop") },
+	{ MODKEY|ShiftMask,		  XK_a,   	        spawn,	  SHCMD("dunstctl close-all") },
+	{ MODKEY|ControlMask,		XK_a,   	        spawn,	  SHCMD("dunstctl close") },
+	{ MODKEY|ControlMask,		XK_m,   	        spawn,	  SHCMD("dmenumount") },
+	{ MODKEY|ControlMask|ShiftMask,	  XK_m,   spawn,	  SHCMD("dmenuumount") },
   /* floatthings */
   { MODKEY|ShiftMask,    XK_Return,      spawn,    SHCMD("st -c float-st -g 100x25+350+200") },
   { MODKEY,              XK_e,           spawn,    SHCMD("st -c float-st-ranger -g 100x25+350+200 ranger") },
@@ -173,7 +174,8 @@ static Key keys[] = {
   { MODKEY,              XK_apostrophe,  spawn,    SHCMD("st -c float-st-calc -g 50x20+660+275 bc -lq") },
   { MODKEY|ShiftMask,    XK_m,           spawn,    SHCMD("st -c float-st-ncmpcpp -g 100x25+350+200 ncmpcpp") },
   { MODKEY|ControlMask,  XK_n,           spawn,    SHCMD("st -c float-st-nmtui -g 50x30+650+150 nmtui") },
-  { MODKEY|ShiftMask,    XK_r,           spawn,    SHCMD("st -c float-st-bpytop -g 100x25+350+200 bpytop") },
+  { MODKEY|ControlMask,  XK_Delete,      spawn,    SHCMD("st -c float-st-bpytop -g 120x30+350+200 bpytop") },
+  { MODKEY|ShiftMask,    XK_Delete,      spawn,    SHCMD("st -c float-st-gotop -g 120x30+350+200 gotop") },
   /* screenshots */
 	{ 0,			     	XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ ShiftMask,	  XK_Print,	spawn,		SHCMD("maimpick") },
@@ -235,16 +237,16 @@ static Key keys[] = {
 	{ MODKEY,                       XK_i,      view_adjacent,  { .i = -1 } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
-	{ MODKEY,            XK_t,   setlayout,   {.v = &layouts[0]} }, //tile
-	{ MODKEY|ShiftMask,  XK_t,   setlayout,   {.v = &layouts[5]} }, //bstack
-	{ MODKEY,            XK_y,   setlayout,   {.v = &layouts[9]} }, //horizgrid
-	{ MODKEY|ShiftMask,  XK_y,   setlayout,   {.v = &layouts[10]} }, //gaplessgrid
-	{ MODKEY,            XK_u,   setlayout,   {.v = &layouts[11]} }, //ceneteredmaster
-	{ MODKEY|ShiftMask,  XK_u,   setlayout,   {.v = &layouts[12]} }, //ceneteredfloatingmaster
-	{ MODKEY|ShiftMask,  XK_f,   setlayout,   {.v = &layouts[13]} }, //floating
-	{ MODKEY,            XK_m,   setlayout,   {.v = &layouts[1]} }, //tile
-	{ MODKEY|ShiftMask,  XK_s,   setlayout,   {.v = &layouts[2]} }, //spiral
-	{ MODKEY,            XK_c,   setlayout,   {.v = &layouts[4]} }, //deck
+	{ MODKEY,             XK_t,   setlayout,   {.v = &layouts[0]} }, //tile
+	{ MODKEY|ShiftMask,   XK_t,   setlayout,   {.v = &layouts[5]} }, //bstack
+	{ MODKEY,             XK_y,   setlayout,   {.v = &layouts[9]} }, //horizgrid
+	{ MODKEY|ShiftMask,   XK_y,   setlayout,   {.v = &layouts[10]} }, //gaplessgrid
+	{ MODKEY,             XK_u,   setlayout,   {.v = &layouts[11]} }, //ceneteredmaster
+	{ MODKEY|ShiftMask,   XK_u,   setlayout,   {.v = &layouts[12]} }, //ceneteredfloatingmaster
+	{ MODKEY|ShiftMask,   XK_f,   setlayout,   {.v = &layouts[13]} }, //floating
+	{ MODKEY,             XK_m,   setlayout,   {.v = &layouts[1]} }, //tile
+	{ MODKEY|ShiftMask,   XK_s,   setlayout,   {.v = &layouts[2]} }, //spiral
+	{ MODKEY,             XK_c,   setlayout,   {.v = &layouts[4]} }, //deck
 
 	{ MODKEY,               XK_semicolon,  setlayout,  {0} },
 	{ MODKEY|ShiftMask,     XK_space,  togglefloating, {0} },
@@ -266,8 +268,8 @@ static Key keys[] = {
 	TAGKEYS(                XK_7,                      6)
 	TAGKEYS(                XK_8,                      7)
 	TAGKEYS(                XK_9,                      8)
-	{ MODKEY|ControlMask,           XK_q,      quit,           {1} }, //quit
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {0} }, //restart
+	{ MODKEY|ControlMask,           XK_q,    quit,     {1} }, //quit
+	{ MODKEY|ControlMask|ShiftMask, XK_q,    quit,     {0} }, //restart
 };
 
 /* button definitions */
