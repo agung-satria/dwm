@@ -50,6 +50,7 @@ static const Rule rules[] = {
 */
 	/* class                instance    title       tags mask     iscentered   isfloating   monitor */
  	{ "Gimp-2.10",	        NULL,			  NULL,		    1 << 2,	      1,           0,			     -1 },
+ 	{ "Inkscape",	          NULL,			  NULL,		    1 << 2,	      1,           0,			     -1 },
  	{ "Firefox",            NULL,			  NULL,		    1 << 1,			  1,           0,			     -1 },
  	{ "Brave-browser",      NULL,			  NULL,		    1 << 1,			  1,           0,			     -1 },
   { "St",				          NULL,       NULL,       0,            1,           0,           -1 },
@@ -175,7 +176,8 @@ static Key keys[] = {
   { MODKEY|ShiftMask,    XK_m,           spawn,    SHCMD("st -c float-st-ncmpcpp -g 100x25+350+200 ncmpcpp") },
   { MODKEY|ControlMask,  XK_n,           spawn,    SHCMD("st -c float-st-nmtui -g 50x30+650+150 nmtui") },
   { MODKEY|ControlMask,  XK_Delete,      spawn,    SHCMD("st -c float-st-bpytop -g 120x30+350+200 bpytop") },
-  { MODKEY|ShiftMask,    XK_Delete,      spawn,    SHCMD("st -c float-st-gotop -g 120x30+350+200 gotop") },
+  { MODKEY|ShiftMask,    XK_Delete,      spawn,    SHCMD("st -c float-st-gotop -g 100x25+350+200 gotop") },
+  { MODKEY|ShiftMask,    XK_r,           spawn,    SHCMD("st -c float-st-gotop -g 100x25+350+200 gotop") },
   /* screenshots */
 	{ 0,			     	XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 	{ ShiftMask,	  XK_Print,	spawn,		SHCMD("maimpick") },
