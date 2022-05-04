@@ -270,6 +270,9 @@ static Key keys[] = {
 	TAGKEYS(                XK_7,                      6)
 	TAGKEYS(                XK_8,                      7)
 	TAGKEYS(                XK_9,                      8)
+	{ MODKEY|ShiftMask,     XK_o, scratchpad_show, {0} },
+	{ MODKEY|ShiftMask,     XK_i, scratchpad_hide, {0} },
+	{ MODKEY|ShiftMask,     XK_minus,scratchpad_remove,{0} },
 	{ MODKEY|ControlMask,           XK_q,    quit,     {1} }, //quit
 	{ MODKEY|ControlMask|ShiftMask, XK_q,    quit,     {0} }, //restart
 };
