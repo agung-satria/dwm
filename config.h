@@ -8,6 +8,7 @@
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 1;        /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 15;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 12;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 14;       /* horiz outer gap between windows and screen edge */
@@ -48,35 +49,36 @@ static const Rule rules[] = {
  * WM_CLASS(STRING) = instance, class
  * WM_NAME(STRING) = title
 */
-	/* class                instance    title       tags mask     iscentered   isfloating   monitor */
- 	{ "Gimp-2.10",	        NULL,			  NULL,		    1 << 2,	      1,           0,			     -1 },
- 	{ "Inkscape",	          NULL,			  NULL,		    1 << 2,	      1,           0,			     -1 },
- 	{ "Firefox",            NULL,			  NULL,		    1 << 1,			  1,           0,			     -1 },
- 	{ "Brave-browser",      NULL,			  NULL,		    1 << 1,			  1,           0,			     -1 },
-  { "St",				          NULL,       NULL,       0,            1,           0,           -1 },
-  { "Yad",				        NULL,       NULL,       0,            1,           1,           -1 },
-	{ "Wine",               NULL,       NULL,       0,            1,           1,           -1 },
-	{ "Arandr",             NULL,       NULL,       0,            1,           1,           -1 },
-	{ "ksnip",              NULL,       NULL,       0,            1,           1,           -1 },
-	{ "Pavucontrol",        NULL,       NULL,       0,            1,           1,           -1 },
-	{ "vokoscreen",         NULL,       NULL,       0,            1,           1,           -1 },
-	{ "SimpleScreenRecorder",NULL,      NULL,       0,            1,           1,           -1 },
-	{ "xdman-Main",         NULL,       NULL,       0,            1,           1,           -1 },
-	{ "zoom",               NULL,       NULL,       0,            1,           0,           -1 },
-	{ "arandr",             NULL,       NULL,       0,            1,           1,           -1 },
-	{ "audacious",          NULL,       NULL,       0,            1,           0,           -1 },
-	{ "Dragon",             NULL,       NULL,       0,            1,           1,           -1 },
-	{ "firefox",            NULL,       NULL,       1 << 1,       1,           0,           -1 },
-  /* floatthings */
-  { "float-st",           NULL,       NULL,       0,            1,           1,           -1 },
-  { "float-st-ranger",    NULL,       NULL,       0,            1,           1,           -1 },
-  { "float-st-calcurse",  NULL,       NULL,       0,            1,           1,           -1 },
-  { "float-st-calc",      NULL,       NULL,       0,            1,           1,           -1 },
-  { "float-st-ncmpcpp",   NULL,       NULL,       0,            1,           1,           -1 },
-  { "float-st-nmtui",     NULL,       NULL,       0,            0,           1,           -1 },
-  { "float-st-bpytop",    NULL,       NULL,       0,            1,           1,           -1 },
-  { "float-st-gotop",     NULL,       NULL,       0,            1,           1,           -1 },
-  { "float-st-obs",       NULL,       NULL,       0,            1,           1,           -1 },
+  	/* class                instance    title       tags mask     iscentered   isfloating   isterminal  noswallow    monitor */
+   	{ "Gimp-2.10",	        NULL,			  NULL,		    1 << 2,	      1,           0,			      0,           0,         -1 },
+   	{ "Firefox",            NULL,			  NULL,		    1 << 1,			  1,           0,			      0,          -1,         -1 },
+    { "St",				          NULL,       NULL,       0,            1,           0,           1,           0,         -1 },
+   	{ "Brave-browser",      NULL,			  NULL,		    1 << 1,			  1,           0,			      0,           1,         -1 },
+   	{ "Inkscape",	          NULL,			  NULL,		    1 << 2,	      1,           0,			      0,          -1,         -1 },
+    { "Yad",				        NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "Wine",               NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "Arandr",             NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "ksnip",              NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "Pavucontrol",        NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "vokoscreen",         NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "SimpleScreenRecorder",NULL,      NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "xdman-Main",         NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "zoom",               NULL,       NULL,       0,            1,           0,           0,           0,         -1 },
+  	{ "arandr",             NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "audacious",          NULL,       NULL,       0,            1,           0,           0,           0,         -1 },
+  	{ "Dragon",             NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+  	{ "firefox",            NULL,       NULL,       1 << 1,       1,           0,           0,           0,         -1 },
+  	{ NULL,                 NULL,  Event Tester",   0,            0,           0,           0,           1,         -1 }, /* xev */
+    /* floatthings */
+    { "float-st",           NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-ranger",    NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-calcurse",  NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-calc",      NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-ncmpcpp",   NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-nmtui",     NULL,       NULL,       0,            0,           1,           0,           0,         -1 },
+    { "float-st-bpytop",    NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-gotop",     NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-obs",       NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
 };
 
 /* layout(s) */
