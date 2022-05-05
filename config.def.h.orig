@@ -164,6 +164,7 @@ static Key keys[] = {
 	{ ControlMask|ALTKEY,		XK_l,   	        spawn,	  SHCMD("lock") },
   { MODKEY|ALTKEY,        XK_x,             spawn,		SHCMD("betterlockscreen --lock") },
   { MODKEY|ShiftMask,  		XK_e,             spawn,		SHCMD("pcmanfm") },
+  { MODKEY|ShiftMask,  		XK_d,             spawn,		SHCMD("samedir") },
 	{ MODKEY,			          XK_grave,	        spawn,	  SHCMD("dmenuunicode") },
 	{ MODKEY,			          XK_a,   	        spawn,	  SHCMD("dunstctl history-pop") },
 	{ MODKEY|ShiftMask,		  XK_a,   	        spawn,	  SHCMD("dunstctl close-all") },
@@ -241,6 +242,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_i,      view_adjacent,  { .i = -1 } },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
+	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
+	{ MODKEY|ControlMask,   XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,             XK_t,   setlayout,   {.v = &layouts[0]} }, //tile
 	{ MODKEY|ShiftMask,   XK_t,   setlayout,   {.v = &layouts[5]} }, //bstack
 	{ MODKEY,             XK_y,   setlayout,   {.v = &layouts[9]} }, //horizgrid

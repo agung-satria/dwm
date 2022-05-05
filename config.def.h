@@ -306,14 +306,15 @@ static Button buttons[] = {
 	 * to control these separately (i.e. to retain the feature to move a tiled window
 	 * into a floating position).
 	 */
-	{ ClkClientWin,     MODKEY,       Button1,     moveorplace,    {.i = 1} },
-	{ ClkClientWin,     MODKEY,       Button2,     togglefloating, {0} },
-	{ ClkClientWin,     MODKEY,       Button3,     resizemouse,    {0} },
-	{ ClkTagBar,        0,            Button1,     view,           {0} },
-	{ ClkTagBar,        0,            Button3,     toggleview,     {0} },
-	{ ClkTagBar,        MODKEY,       Button1,     tag,            {0} },
-	{ ClkTagBar,        MODKEY,       Button3,     toggletag,      {0} },
-	{ ClkTabBar,        0,            Button1,     focuswin,       {0} },
-  { ClkTagBar,        0,            Button4,     view_adjacent,  { .i = -1 } },
-	{ ClkTagBar,        0,            Button5,     view_adjacent,  { .i = +1 } },
+	{ ClkClientWin,  MODKEY,    Button1,     moveorplace,    {.i = 1} },
+	{ ClkClientWin,  MODKEY,    Button2,     togglefloating, {0} },
+	{ ClkClientWin,  MODKEY,    Button3,     resizemouse,    {0} },
+	{ ClkClientWin,  MODKEY|ShiftMask, Button1, dragmfact,   {0} },
+	{ ClkTagBar,     0,         Button1,     view,           {0} },
+	{ ClkTagBar,     0,         Button3,     toggleview,     {0} },
+	{ ClkTagBar,     MODKEY,    Button1,     tag,            {0} },
+	{ ClkTagBar,     MODKEY,    Button3,     toggletag,      {0} },
+	{ ClkTabBar,     0,         Button1,     focuswin,       {0} },
+  { ClkTagBar,     0,         Button4,     view_adjacent,  { .i = -1 } },
+	{ ClkTagBar,     0,         Button5,     view_adjacent,  { .i = +1 } },
 };
