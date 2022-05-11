@@ -1,42 +1,10 @@
 --- dwm.c
 +++ dwm.c
-@@ -162,6 +162,7 @@ static void destroynotify(XEvent *e);
- static void detach(Client *c);
- static void detachstack(Client *c);
- static Monitor *dirtomon(int dir);
-+static void dragcfact(const Arg *arg);
- static void drawbar(Monitor *m);
- static void drawbars(void);
- static void enternotify(XEvent *e);
-@@ -1590,19 +1666,25 @@ setlayout(const Arg *arg)
- }
- 
- void
--setcfact(const Arg *arg) {
-+setcfact(const Arg *arg)
-+{
- 	float f;
- 	Client *c;
- 
- 	c = selmon->sel;
- 
--	if(!arg || !c || !selmon->lt[selmon->sellt]->arrange)
-+	if (!arg || !c || !selmon->lt[selmon->sellt]->arrange)
- 		return;
--	f = arg->f + c->cfact;
--	if(arg->f == 0.0)
-+	if (!arg->f)
- 		f = 1.0;
--	else if(f < 0.25 || f > 4.0)
--		return;
-+	else if (arg->f > 4.0) // set fact absolutely
-+		f = arg->f - 4.0;
-+	else
-+		f = arg->f + c->cfact;
-+	if (f < 0.25)
-+		f = 0.25;
-+	else if (f > 4.0)
-+		f = 4.0;
- 	c->cfact = f;
- 	arrange(selmon);
- }
+@@ -211,6 +211,7 @@ static void tagmon(const Arg *arg);
+ static void tile(Monitor *);
+ static void togglebar(const Arg *arg);
+ static void togglefloating(const Arg *arg);
++static void togglefullscr(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+ static void unfocus(Client *c, int setfocus);

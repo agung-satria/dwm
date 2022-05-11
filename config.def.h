@@ -260,6 +260,7 @@ static Key keys[] = {
 	{ MODKEY,               XK_semicolon,  setlayout,  {0} },
 	{ MODKEY|ShiftMask,     XK_space,  togglefloating, {0} },
 	{ MODKEY,               XK_s,      togglesticky,   {0} },
+  { MODKEY,               XK_f,      togglefullscr,  {0} },
 	{ MODKEY|ControlMask,   XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY|ControlMask,   XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ALTKEY,        XK_comma,  tagmon,         {.i = -1 } },
