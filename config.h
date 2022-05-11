@@ -28,7 +28,7 @@ static const int toptab				= False;               /* False means bottom tab bar 
 static const char *fonts[]        = { "Iosevka Nerd Font:style:medium:size=15",
                                       "JoyPixels:size=13:antialias=true:autohint=true", 
                                       "Material Design Icons-Regular:size=15"};
-static const char dmenufont[]     = "monospace:size=15";
+static const char dmenufont[]     = "Iosevka Nerd Font:style:medium:size=15";
 static const char col_gray1[]     = "#222222";
 static const char col_gray2[]     = "#444444";
 static const char col_gray3[]     = "#bbbbbb";
@@ -73,7 +73,7 @@ static const Rule rules[] = {
   	{ NULL,                NULL,  "Event Tester",   0,            0,           0,           0,           1,         -1 }, /* xev */
     /* floatthings */
     { "float-st",           NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
-    { "float-st-ranger",    NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-lfub",    NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
     { "float-st-calcurse",  NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
     { "float-st-calc",      NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
     { "float-st-ncmpcpp",   NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
@@ -175,7 +175,7 @@ static Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask,	  XK_m,   spawn,	  SHCMD("dmenuumount") },
   /* floatthings */
   { MODKEY|ShiftMask,    XK_Return,      spawn,    SHCMD("st -c float-st -g 100x25+350+200") },
-  { MODKEY,              XK_e,           spawn,    SHCMD("st -c float-st-ranger -g 100x25+350+200 ranger") },
+  { MODKEY,              XK_e,           spawn,    SHCMD("st -c float-st-lfub -g 100x25+350+200 lfub") },
   { MODKEY|ShiftMask,    XK_c,           spawn,    SHCMD("st -c float-st-calcurse -g 100x25+350+200 calcurse") },
   { MODKEY,              XK_apostrophe,  spawn,    SHCMD("st -c float-st-calc -g 50x20+660+275 bc -lq") },
   { MODKEY|ShiftMask,    XK_m,           spawn,    SHCMD("st -c float-st-ncmpcpp -g 100x25+350+200 ncmpcpp") },
