@@ -167,6 +167,7 @@ static Key keys[] = {
 	{ ControlMask|ALTKEY,		XK_l,   	        spawn,	  SHCMD("lock") },
   { MODKEY|ALTKEY,        XK_x,             spawn,		SHCMD("betterlockscreen --lock") },
   { MODKEY|ShiftMask,  		XK_e,             spawn,		SHCMD("dolphin") },
+  { MODKEY|ShiftMask,  		XK_w,             spawn,		SHCMD("brave") },
   { MODKEY|ShiftMask,  		XK_d,             spawn,		SHCMD("samedir") },
 	{ MODKEY,			          XK_grave,	        spawn,	  SHCMD("dmenuunicode") },
 	{ MODKEY,			          XK_a,   	        spawn,	  SHCMD("dunstctl history-pop") },
