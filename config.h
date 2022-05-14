@@ -94,11 +94,11 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 static const Layout layouts[] = {
 /*        symbol        arrange function */
 /*0 */    { "[]=",      tile },    /* first entry is default */
-/*1 */    { "[M]",      monocle },
+/*1 */    { "TTT",      bstack },
 /*2 */    { "[@]",      spiral },
 /*3 */    { "[\\]",     dwindle },
 /*4 */    { "H[]",      deck },
-/*5 */    { "TTT",      bstack },
+/*5 */    { "[M]",      monocle },
 /*6 */    { "===",      bstackhoriz },
 /*7 */    { "HHH",      grid },
 /*8 */    { "###",      nrowgrid },
@@ -107,6 +107,7 @@ static const Layout layouts[] = {
 /*11*/    { "|M|",      centeredmaster },
 /*12*/    { ">M>",      centeredfloatingmaster },
 /*13*/    { "><>",      NULL },    /* no layout function means floating behavior */
+
 	        { NULL,       NULL },
 };
 
@@ -250,13 +251,13 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		XK_comma,  cyclelayout,    {.i = -1 } },
 	{ MODKEY|ControlMask,   XK_period, cyclelayout,    {.i = +1 } },
 	{ MODKEY,             XK_t,   setlayout,   {.v = &layouts[0]} }, //tile
-	{ MODKEY|ShiftMask,   XK_t,   setlayout,   {.v = &layouts[5]} }, //bstack
+	{ MODKEY|ShiftMask,   XK_t,   setlayout,   {.v = &layouts[1]} }, //bstack
 	{ MODKEY,             XK_y,   setlayout,   {.v = &layouts[9]} }, //horizgrid
 	{ MODKEY|ShiftMask,   XK_y,   setlayout,   {.v = &layouts[10]} }, //gaplessgrid
-	{ MODKEY,             XK_u,   setlayout,   {.v = &layouts[11]} }, //ceneteredmaster
-	{ MODKEY|ShiftMask,   XK_u,   setlayout,   {.v = &layouts[12]} }, //ceneteredfloatingmaster
+	{ MODKEY,             XK_u,   setlayout,   {.v = &layouts[11]} }, //centeredmaster
+	{ MODKEY|ShiftMask,   XK_u,   setlayout,   {.v = &layouts[12]} }, //centeredfloatingmaster
 	{ MODKEY|ShiftMask,   XK_f,   setlayout,   {.v = &layouts[13]} }, //floating
-	{ MODKEY,             XK_m,   setlayout,   {.v = &layouts[1]} }, //tile
+	{ MODKEY,             XK_m,   setlayout,   {.v = &layouts[5]} }, //tile
 	{ MODKEY|ShiftMask,   XK_s,   setlayout,   {.v = &layouts[2]} }, //spiral
 	{ MODKEY,             XK_c,   setlayout,   {.v = &layouts[4]} }, //deck
 
