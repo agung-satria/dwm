@@ -41,28 +41,6 @@ static const char *colors[][3]    = {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_red  },
 };
 
-typedef struct {
-	const char *name;
-	const void *cmd;
-} Sp;
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "100x25", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "100x25", "-e", "lfub", NULL };
-const char *spcmd3[] = {"keepassxc", NULL };
-const char *spcmd4[] = {"st", "-n", "spcalc", "-g", "50x20+660+275", "bc", "-lq", NULL };
-const char *spcmd5[] = {"st", "-n", "spncmpcpp", "-g", "100x25", "-e", "ncmpcpp", NULL };
-const char *spcmd6[] = {"st", "-n", "spcalcurse", "-g", "100x25", "-e", "calcurse", NULL };
-const char *spcmd7[] = {"st", "-n", "spnmtui", "-g", "100x25", "-e", "nmtui", NULL };
-static Sp scratchpads[] = {
-	/* name          cmd  */
-	{"spterm",      spcmd1},
-	{"spfm",        spcmd2},
-	{"keepassxc",   spcmd3},
-	{"spcalc",      spcmd4},
-	{"spncmpcpp",   spcmd5},
-	{"spcalcurse",  spcmd6},
-	{"spnmtui",     spcmd7},
-};
-
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 /* static const char *tags[] = { "", "🌏", "🎨", "🕹", "🐧", "💻", "📰", "📂", "🔍" }; */
@@ -94,16 +72,6 @@ static const Rule rules[] = {
   	{ "Dragon",             NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
   	{ "firefox",            NULL,       NULL,       1 << 1,       1,           0,           0,           0,         -1 },
   	{ NULL,                NULL,  "Event Tester",   0,            0,           0,           0,           1,         -1 }, /* xev */
-
-    /* scratchpads */
-	{ NULL,		               "spterm",		NULL,		SPTAG(0),	      	1,	         1,           0,           0,		      -1 },
-	{ NULL,		               "spfm",		  NULL,		SPTAG(1),	      	1,	         1,           0,           0,		      -1 },
-	{ NULL,		               "keepassxc",	NULL,		SPTAG(2),	      	0,	         1,           0,           0,		      -1 },
-	{ NULL,		               "spcalc",		NULL,		SPTAG(3),	      	1,	         1,           0,           0,		      -1 },
-	{ NULL,		               "spncmpcpp", NULL,		SPTAG(4),	      	1,	         1,           0,           0,		      -1 },
-	{ NULL,		               "spcalcurse",NULL,		SPTAG(5),	      	1,	         1,           0,           0,		      -1 },
-	{ NULL,		               "spnmtui",   NULL,		SPTAG(6),	      	1,	         1,           0,           0,		      -1 },
-
     /* floatthings */
     { "float-st",           NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
     { "float-st-lfub",    NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
@@ -209,6 +177,12 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		XK_m,   	        spawn,	  SHCMD("dmenumount") },
 	{ MODKEY|ControlMask|ShiftMask,	  XK_m,   spawn,	  SHCMD("dmenuumount") },
   /* floatthings */
+  { MODKEY|ShiftMask,    XK_Return,      spawn,    SHCMD("st -c float-st -g 100x25+350+200") },
+  { MODKEY,              XK_e,           spawn,    SHCMD("st -c float-st-lfub -g 100x25+350+200 lfub") },
+  { MODKEY|ShiftMask,    XK_c,           spawn,    SHCMD("st -c float-st-calcurse -g 100x25+350+200 calcurse") },
+  { MODKEY,              XK_apostrophe,  spawn,    SHCMD("st -c float-st-calc -g 50x20+660+275 bc -lq") },
+  { MODKEY|ShiftMask,    XK_m,           spawn,    SHCMD("st -c float-st-ncmpcpp -g 100x25+350+200 ncmpcpp") },
+  { MODKEY|ControlMask,  XK_n,           spawn,    SHCMD("st -c float-st-nmtui -g 50x30+650+150 nmtui") },
   { MODKEY|ControlMask,  XK_Delete,      spawn,    SHCMD("st -c float-st-bpytop -g 120x30+350+200 bpytop") },
   { MODKEY|ShiftMask,    XK_Delete,      spawn,    SHCMD("st -c float-st-gotop -g 100x25+350+200 gotop") },
   { MODKEY|ShiftMask,    XK_r,           spawn,    SHCMD("st -c float-st-gotop -g 100x25+350+200 gotop") },
@@ -300,13 +274,6 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,   XK_c, 		 setborderpx,  {.i = +1 } },
 	{ MODKEY|ControlMask,   XK_x, 		 setborderpx,  {.i = -1 } },
 	{ MODKEY|ControlMask,   XK_z,      setborderpx,  {.i = 0 } },
-	{ MODKEY|ShiftMask, 	  XK_Return, togglescratch,  {.ui = 0 } },
-	{ MODKEY,            	  XK_e,	     togglescratch,  {.ui = 1 } },
-	{ MODKEY|ShiftMask,    	XK_p,	     togglescratch,  {.ui = 2 } },
-	{ MODKEY,          	XK_apostrophe, togglescratch,  {.ui = 3 } },
-	{ MODKEY|ShiftMask,    	XK_m,	     togglescratch,  {.ui = 4 } },
-  { MODKEY|ShiftMask,    	XK_c,	     togglescratch,  {.ui = 5 } },
-	{ MODKEY|ControlMask,   XK_n,	     togglescratch,  {.ui = 6 } },
 	TAGKEYS(                XK_1,                      0)
 	TAGKEYS(                XK_2,                      1)
 	TAGKEYS(                XK_3,                      2)
