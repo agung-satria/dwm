@@ -52,6 +52,7 @@ const char *spcmd4[] = {"st", "-n", "spcalc", "-g", "50x20+660+275", "bc", "-lq"
 const char *spcmd5[] = {"st", "-n", "spncmpcpp", "-g", "100x25", "-e", "ncmpcpp", NULL };
 const char *spcmd6[] = {"st", "-n", "spcalcurse", "-g", "100x25", "-e", "calcurse", NULL };
 const char *spcmd7[] = {"st", "-n", "spnmtui", "-g", "100x25", "-e", "nmtui", NULL };
+const char *spcmd8[] = {"dolphin", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -61,6 +62,7 @@ static Sp scratchpads[] = {
 	{"spncmpcpp",   spcmd5},
 	{"spcalcurse",  spcmd6},
 	{"spnmtui",     spcmd7},
+	{"dolphin",     spcmd8},
 };
 
 /* tagging */
@@ -79,7 +81,6 @@ static const Rule rules[] = {
     { "St",				          NULL,       NULL,       0,            1,           0,           1,           0,         -1 },
    	{ "Brave-browser",      NULL,			  NULL,		    1 << 1,			  1,           0,			      0,           1,         -1 },
    	{ "Inkscape",	          NULL,			  NULL,		    1 << 2,	      1,           0,			      0,          -1,         -1 },
-   	{ "dolphin",	          NULL,			  NULL,		    0,	          1,           1,			      0,          -1,         -1 },
     { "Yad",				        NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
   	{ "Wine",               NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
   	{ "Arandr",             NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
@@ -103,10 +104,11 @@ static const Rule rules[] = {
 	{ NULL,		               "spncmpcpp", NULL,		SPTAG(4),	      	1,	         1,           0,           0,		      -1 },
 	{ NULL,		               "spcalcurse",NULL,		SPTAG(5),	      	1,	         1,           0,           0,		      -1 },
 	{ NULL,		               "spnmtui",   NULL,		SPTAG(6),	      	1,	         1,           0,           0,		      -1 },
+	{ NULL,		               "dolphin",   NULL,		SPTAG(7),	      	1,	         1,           0,           0,		      -1 },
 
     /* floatthings */
     { "float-st",           NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
-    { "float-st-lfub",    NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
+    { "float-st-lfub",      NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
     { "float-st-calcurse",  NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
     { "float-st-calc",      NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
     { "float-st-ncmpcpp",   NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
@@ -199,7 +201,6 @@ static Key keys[] = {
   { MODKEY,           		XK_g,             spawn,		SHCMD("editconfig") },
 	{ ControlMask|ALTKEY,		XK_l,   	        spawn,	  SHCMD("lock") },
   { MODKEY|ALTKEY,        XK_x,             spawn,		SHCMD("betterlockscreen --lock") },
-  { MODKEY|ShiftMask,  		XK_e,             spawn,		SHCMD("dolphin") },
   { MODKEY|ShiftMask,  		XK_w,             spawn,		SHCMD("brave") },
   { MODKEY|ShiftMask,  		XK_d,             spawn,		SHCMD("samedir") },
 	{ MODKEY,			          XK_grave,	        spawn,	  SHCMD("dmenuunicode") },
@@ -307,6 +308,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,    	XK_m,	     togglescratch,  {.ui = 4 } },
   { MODKEY|ShiftMask,    	XK_c,	     togglescratch,  {.ui = 5 } },
 	{ MODKEY|ControlMask,   XK_n,	     togglescratch,  {.ui = 6 } },
+	{ MODKEY|ShiftMask,    	XK_e,	     togglescratch,  {.ui = 7 } },
 	TAGKEYS(                XK_1,                      0)
 	TAGKEYS(                XK_2,                      1)
 	TAGKEYS(                XK_3,                      2)
