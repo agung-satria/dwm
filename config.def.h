@@ -355,4 +355,9 @@ static Button buttons[] = {
 	{ ClkTabBar,     0,         Button1,     focuswin,       {0} },
   { ClkTagBar,     0,         Button4,     view_adjacent,  { .i = -1 } },
 	{ ClkTagBar,     0,         Button5,     view_adjacent,  { .i = +1 } },
+ 	{ ClkClientWin,		MODKEY,		Button4,	incrgaps,	{.i = +3} },
+	{ ClkClientWin,		MODKEY,		Button5,	incrgaps,	{.i = -3} },
+ 	{ ClkClientWin,		MODKEY|ControlMask,		Button4,	setborderpx,  {.i = +1 } },
+	{ ClkClientWin,		MODKEY|ControlMask,		Button5,	setborderpx,  {.i = -1 } },
+
 };
