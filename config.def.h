@@ -47,22 +47,20 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "100x25", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "100x25", "-e", "lfub", NULL };
-const char *spcmd3[] = {"keepassxc", NULL };
+const char *spcmd3[] = {"dolphin", NULL };
 const char *spcmd4[] = {"st", "-n", "spcalc", "-g", "50x20+660+275", "bc", "-lq", NULL };
 const char *spcmd5[] = {"st", "-n", "spncmpcpp", "-g", "100x25", "-e", "ncmpcpp", NULL };
 const char *spcmd6[] = {"st", "-n", "spcalcurse", "-g", "100x25", "-e", "calcurse", NULL };
 const char *spcmd7[] = {"st", "-n", "spnmtui", "-g", "100x25", "-e", "nmtui", NULL };
-const char *spcmd8[] = {"dolphin", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
 	{"spfm",        spcmd2},
-	{"keepassxc",   spcmd3},
+	{"dolphin",     spcmd3},
 	{"spcalc",      spcmd4},
 	{"spncmpcpp",   spcmd5},
 	{"spcalcurse",  spcmd6},
 	{"spnmtui",     spcmd7},
-	{"dolphin",     spcmd8},
 };
 
 /* tagging */
@@ -99,12 +97,11 @@ static const Rule rules[] = {
     /* scratchpads */
 	{ NULL,		               "spterm",		NULL,		SPTAG(0),	      	1,	         1,           0,           0,		      -1 },
 	{ NULL,		               "spfm",		  NULL,		SPTAG(1),	      	1,	         1,           0,           0,		      -1 },
-	{ NULL,		               "keepassxc",	NULL,		SPTAG(2),	      	0,	         1,           0,           0,		      -1 },
+	{ NULL,		               "dolphin",   NULL,		SPTAG(2),	      	1,	         1,           0,           0,		      -1 },
 	{ NULL,		               "spcalc",		NULL,		SPTAG(3),	      	1,	         1,           0,           0,		      -1 },
 	{ NULL,		               "spncmpcpp", NULL,		SPTAG(4),	      	1,	         1,           0,           0,		      -1 },
 	{ NULL,		               "spcalcurse",NULL,		SPTAG(5),	      	1,	         1,           0,           0,		      -1 },
 	{ NULL,		               "spnmtui",   NULL,		SPTAG(6),	      	1,	         1,           0,           0,		      -1 },
-	{ NULL,		               "dolphin",   NULL,		SPTAG(7),	      	1,	         1,           0,           0,		      -1 },
 
     /* floatthings */
     { "float-st",           NULL,       NULL,       0,            1,           1,           0,           0,         -1 },
@@ -198,10 +195,11 @@ static Key keys[] = {
   /* launch script (dmenu, etc) */
  	{ MODKEY,		            XK_BackSpace,	    spawn,	  SHCMD("sysact") },
   { MODKEY,								XK_Escape,        spawn,		SHCMD("sysact") },
+  { MODKEY|ShiftMask,			XK_q,             spawn,		SHCMD("sysact") },
   { MODKEY,           		XK_g,             spawn,		SHCMD("editconfig") },
 	{ ControlMask|ALTKEY,		XK_l,   	        spawn,	  SHCMD("lock") },
   { MODKEY|ALTKEY,        XK_x,             spawn,		SHCMD("betterlockscreen --lock") },
-  { MODKEY|ShiftMask,  		XK_w,             spawn,		SHCMD("brave") },
+  { MODKEY,           		XK_w,             spawn,		SHCMD("brave") },
   { MODKEY|ShiftMask,  		XK_d,             spawn,		SHCMD("samedir") },
 	{ MODKEY,			          XK_grave,	        spawn,	  SHCMD("dmenuunicode") },
 	{ MODKEY,			          XK_a,   	        spawn,	  SHCMD("dunstctl history-pop") },
@@ -210,9 +208,9 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,		XK_m,   	        spawn,	  SHCMD("dmenumount") },
 	{ MODKEY|ControlMask|ShiftMask,	  XK_m,   spawn,	  SHCMD("dmenuumount") },
   /* floatthings */
-  { MODKEY|ControlMask,  XK_Delete,      spawn,    SHCMD("st -c float-st-bpytop -g 120x30+350+200 bpytop") },
-  { MODKEY|ShiftMask,    XK_Delete,      spawn,    SHCMD("st -c float-st-gotop -g 100x25+350+200 gotop") },
-  { MODKEY|ShiftMask,    XK_r,           spawn,    SHCMD("st -c float-st-gotop -g 100x25+350+200 gotop") },
+  { MODKEY|ControlMask,  XK_Delete,      spawn,    SHCMD("st -c float-st-bpytop -g 120x30 bpytop") },
+  { MODKEY|ShiftMask,    XK_Delete,      spawn,    SHCMD("st -c float-st-gotop -g 100x25 gotop") },
+  { MODKEY|ShiftMask,    XK_r,           spawn,    SHCMD("st -c float-st-gotop -g 100x25 gotop") },
   /* screenshots */
 	/* { 0,			     	XK_Print,	spawn,		SHCMD("maim pic-full-$(date '+%y%m%d-%H%M-%S').png") }, */
 	{ 0,			     	XK_Print,	spawn,		SHCMD("ss-full") },
@@ -225,7 +223,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_r,      spawn,          {.v = rofi } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_w,      tabmode,        {-1} },
+	{ MODKEY|ShiftMask,             XK_w,      tabmode,        {-1} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
   { ALTKEY,                       XK_Tab,    swapfocus,      {0} }, 
@@ -284,7 +282,7 @@ static Key keys[] = {
 	{ MODKEY,             XK_u,   setlayout,   {.v = &layouts[11]} }, //centeredmaster
 	{ MODKEY|ShiftMask,   XK_u,   setlayout,   {.v = &layouts[12]} }, //centeredfloatingmaster
 	{ MODKEY|ShiftMask,   XK_f,   setlayout,   {.v = &layouts[13]} }, //floating
-	{ MODKEY,             XK_m,   setlayout,   {.v = &layouts[5]} }, //tile
+	{ MODKEY,             XK_m,   setlayout,   {.v = &layouts[5]} }, //monocle
 	{ MODKEY|ShiftMask,   XK_s,   setlayout,   {.v = &layouts[2]} }, //spiral
 	{ MODKEY,             XK_c,   setlayout,   {.v = &layouts[4]} }, //deck
 
@@ -298,17 +296,16 @@ static Key keys[] = {
 	{ MODKEY|ALTKEY,        XK_period, tagmon,         {.i = +1 } },
 /*{ MODKEY,               XK_0,      view,           {.ui = ~0 } }, */
 /*{ MODKEY|ShiftMask,     XK_0,      tag,            {.ui = ~0 } }, */
-	{ MODKEY|ControlMask,   XK_c, 		 setborderpx,  {.i = +1 } },
-	{ MODKEY|ControlMask,   XK_x, 		 setborderpx,  {.i = -1 } },
-	{ MODKEY|ControlMask,   XK_z,      setborderpx,  {.i = 0 } },
+	{ MODKEY|ControlMask,   XK_c, 		 setborderpx,    {.i = +1 } },
+	{ MODKEY|ControlMask,   XK_x, 		 setborderpx,    {.i = -1 } },
+	{ MODKEY|ControlMask,   XK_z,      setborderpx,    {.i = 0 } },
 	{ MODKEY|ShiftMask, 	  XK_Return, togglescratch,  {.ui = 0 } },
 	{ MODKEY,            	  XK_e,	     togglescratch,  {.ui = 1 } },
-	{ MODKEY|ShiftMask,    	XK_p,	     togglescratch,  {.ui = 2 } },
+	{ MODKEY|ShiftMask,    	XK_e,	     togglescratch,  {.ui = 2 } },
 	{ MODKEY,          	XK_apostrophe, togglescratch,  {.ui = 3 } },
 	{ MODKEY|ShiftMask,    	XK_m,	     togglescratch,  {.ui = 4 } },
   { MODKEY|ShiftMask,    	XK_c,	     togglescratch,  {.ui = 5 } },
 	{ MODKEY|ControlMask,   XK_n,	     togglescratch,  {.ui = 6 } },
-	{ MODKEY|ShiftMask,    	XK_e,	     togglescratch,  {.ui = 7 } },
 	TAGKEYS(                XK_1,                      0)
 	TAGKEYS(                XK_2,                      1)
 	TAGKEYS(                XK_3,                      2)
@@ -318,8 +315,8 @@ static Key keys[] = {
 	TAGKEYS(                XK_7,                      6)
 	TAGKEYS(                XK_8,                      7)
 	TAGKEYS(                XK_9,                      8)
-	{ MODKEY|ControlMask,           XK_q,    quit,     {1} }, //quit
-	{ MODKEY|ControlMask|ShiftMask, XK_q,    quit,     {0} }, //restart
+	{ MODKEY|ControlMask,           XK_q,    quit,     {1} }, //restart
+	{ MODKEY|ControlMask|ShiftMask, XK_q,    quit,     {0} }, //quit dwm
 };
 
 /* button definitions */
